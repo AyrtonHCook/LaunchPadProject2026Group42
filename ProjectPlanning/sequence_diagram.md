@@ -1,36 +1,4 @@
-
-``` mermaid
-sequenceDiagram
-  actor Aisha Khan
-  Participant Frontend
-  Participant Backend
-  Participant Database
-
-  
-  Frontend ->> Backend: request map
-  activate Frontend
-  activate Backend
-  Backend ->> Database: send query to database, fetch data of trucks
-  activate Database
-  Database -->> Backend: return data of truck
-  Backend ->> Database: update status of truck if needed, get location via api with data
-  deactivate Database
-
-  rect rgb(0,255,0)
-  Backend -->> Frontend: fetch the map
-  deactivate Backend
-  Frontend -->> Aisha Khan: show the map
-  end
-
-  rect rgb(255,0,0)
-  Backend -->> Frontend: unable to fetch data
-  Frontend -->> Aisha Khan: output error connection error
-  deactivate Frontend
-  end
-```
-
----
-
+Get truck locations
 ``` mermaid
 sequenceDiagram
   actor  Aisha Khan
@@ -57,5 +25,38 @@ sequenceDiagram
   Database -->> Backend: connection failed
   Backend -->> Frontend: unable to get data, load error message
   end
-
   Frontend -->> Aisha Khan: view output
+```
+---
+
+view recources available
+
+``` mermaid
+sequenceDiagram
+actor Aisha Khan
+participant Frontend
+participant Backend
+participant Database
+
+Aisha Khan ->> Frontend: load page
+Frontend ->> Backend: request resource data
+activate Frontend
+activate Backend
+Backend ->> Database: fetch data
+activate Database
+
+rect rgb(0,255,0)
+Database -->> Backend: return data, resent data if update detected
+Backend -->> Frontend: load data, update data if needed
+Frontend -->> Aisha Khan: view data
+end
+
+rect rgb(255,0,0)
+Database -->> Backend: unable to return data
+deactivate Database
+Backend -->> Frontend: load error message in a popup
+deactivate Backend
+Frontend -->> Aisha Khan: view results
+deactivate Frontend
+end
+```
