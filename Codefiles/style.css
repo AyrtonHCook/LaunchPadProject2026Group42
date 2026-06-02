@@ -1,0 +1,471 @@
+/* ============================================================
+   LaunchPad — Stylesheet
+   Birmingham Community Food Truck Support Platform
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap');
+
+/* --- Variables -------------------------------------------- */
+:root {
+  --bg:           #0d1117;
+  --surface:      #161b22;
+  --surface-2:    #1e2530;
+  --border:       #2a3240;
+  --orange:       #f97316;
+  --orange-dim:   rgba(249, 115, 22, 0.12);
+  --blue:         #38bdf8;
+  --blue-dim:     rgba(56, 189, 248, 0.12);
+  --green:        #22c55e;
+  --green-dim:    rgba(34, 197, 94, 0.12);
+  --red:          #ef4444;
+  --red-dim:      rgba(239, 68, 68, 0.12);
+  --yellow:       #fbbf24;
+  --yellow-dim:   rgba(251, 191, 36, 0.12);
+  --text:         #e2e8f0;
+  --text-muted:   #64748b;
+  --text-soft:    #94a3b8;
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+  --radius:       12px;
+  --radius-sm:    8px;
+  --radius-pill:  999px;
+}
+
+/* --- Reset ------------------------------------------------ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button { font-family: var(--font-body); cursor: pointer; border: none; background: none; }
+
+/* --- Topbar ----------------------------------------------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.25rem;
+  height: 60px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.topbar__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.topbar__logo-name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.topbar__right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* --- Temperature pill ------------------------------------- */
+.temp-pill {
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-soft);
+}
+
+.temp-pill--alert {
+  background: var(--red-dim);
+  border-color: var(--red);
+  color: #fca5a5;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.7; }
+}
+
+/* --- Icon button ------------------------------------------ */
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: var(--text-soft);
+  transition: background 0.15s;
+}
+
+.icon-btn:hover { background: var(--border); }
+
+/* --- Main content ----------------------------------------- */
+.content {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* --- Hero ------------------------------------------------- */
+.hero {
+  padding: 1rem 0 0.5rem;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  line-height: 1.15;
+}
+
+.hero__sub {
+  margin-top: 0.4rem;
+  font-size: 0.95rem;
+  color: var(--text-soft);
+}
+
+/* --- Alert ------------------------------------------------ */
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem 1.1rem;
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  border-left: 4px solid;
+}
+
+.alert__icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+.alert__close {
+  margin-left: auto;
+  color: inherit;
+  opacity: 0.5;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  padding: 0 0.25rem;
+}
+.alert__close:hover { opacity: 1; }
+
+.alert--critical {
+  background: var(--red-dim);
+  border-color: var(--red);
+  color: #fca5a5;
+}
+
+.alert--info {
+  background: var(--blue-dim);
+  border-color: var(--blue);
+  color: #7dd3fc;
+}
+
+/* --- Stats ------------------------------------------------ */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  text-align: center;
+}
+
+.stat-card__icon { font-size: 1.4rem; }
+
+.stat-card__value {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.1;
+}
+
+.stat-card__label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* --- Panels ----------------------------------------------- */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+
+.panel--highlight {
+  background: var(--orange-dim);
+  border-color: rgba(249, 115, 22, 0.3);
+}
+
+.panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.panel__title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.panel__link {
+  font-size: 0.8rem;
+  color: var(--orange);
+  font-weight: 500;
+}
+
+.panel__link:hover { opacity: 0.7; }
+
+.panel__desc {
+  font-size: 0.875rem;
+  color: var(--text-soft);
+  margin-bottom: 1rem;
+}
+
+/* --- Map area --------------------------------------------- */
+.map-area {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.map-area__icon { font-size: 2rem; opacity: 0.4; }
+
+/* --- Truck list ------------------------------------------- */
+.truck-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.truck-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.15s;
+}
+
+.truck-item:hover { border-color: var(--orange); }
+
+.truck-item--offline { opacity: 0.5; }
+
+.truck-item__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  font-size: 0.9rem;
+  min-width: 0;
+}
+
+.truck-item__location {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.truck-item__stock {
+  display: flex;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+/* --- Status dot ------------------------------------------- */
+.status {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status--active  { background: var(--green);  box-shadow: 0 0 0 3px var(--green-dim); }
+.status--low     { background: var(--yellow); box-shadow: 0 0 0 3px var(--yellow-dim); }
+.status--offline { background: var(--text-muted); }
+
+/* --- Pills ------------------------------------------------ */
+.pill {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-pill);
+}
+
+.pill--food   { background: var(--orange-dim); color: var(--orange); }
+.pill--water  { background: var(--blue-dim);   color: var(--blue); }
+.pill--warn   { background: var(--red-dim);    color: var(--red); }
+.pill--muted  { background: var(--surface);    color: var(--text-muted); border: 1px solid var(--border); }
+
+/* --- Priority bar ----------------------------------------- */
+.priority {
+  width: 4px;
+  min-height: 44px;
+  border-radius: var(--radius-pill);
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+.priority--high   { background: var(--red); }
+.priority--medium { background: var(--yellow); }
+.priority--low    { background: var(--green); }
+
+/* --- Request list ----------------------------------------- */
+.request-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.request-item {
+  display: flex;
+  align-items: stretch;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+}
+
+.request-item__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.request-item__meta {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.request-item__time {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* --- Info list -------------------------------------------- */
+.info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 0.85rem 1rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+}
+
+.info-item__icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.info-item p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+/* --- Buttons ---------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+  transition: all 0.15s;
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+
+.btn--primary {
+  background: var(--orange);
+  color: #fff;
+}
+
+.btn--primary:hover { background: #ea6a0a; }
+
+.btn--full { width: 100%; }
+
+/* --- Footer ----------------------------------------------- */
+.footer {
+  text-align: center;
+  padding: 1.5rem 1.25rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+/* --- Responsive ------------------------------------------- */
+@media (max-width: 520px) {
+  .hero__title { font-size: 1.4rem; }
+
+  .stats { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+  .stat-card { padding: 0.75rem 0.5rem; }
+  .stat-card__value { font-size: 1.3rem; }
+
+  .truck-item__stock { display: none; }
+
+  .temp-pill--alert { display: none; }
+}
