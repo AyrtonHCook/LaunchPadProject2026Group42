@@ -342,4 +342,39 @@ router.post("/logout", requireDriverLogin, (req, res) => {
   });
 });
 
+// Pending resident requests for driver map:
+
+router.get("/requests", requireDriverLogin, async (req, res) => {
+  try {
+    const result = await pool.query(
+      `
+      SELECT
+        request_id,
+        user_name,
+        message,
+        latitude,
+        longitude,
+        status,
+        created_at
+      FROM requests
+      WHERE status = 'Pending'
+      ORDER BY created_at DESC
+      `
+    );
+
+    return res.json({
+      success: true,
+      requests: result.rows
+    });
+  } catch (error) {
+    console.error ("Error on requests fetch:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "SErver error loading requests"
+    });
+
+  }
+});
+
 module.exports = router;
