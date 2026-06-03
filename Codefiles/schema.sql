@@ -1,6 +1,10 @@
 DROP TABLE IF EXISTS restock_locations;
 DROP TABLE IF EXISTS drivers;
 DROP TABLE IF EXISTS trucks;
+DROP TABLE IF EXISTS requests;
+
+CREATE SCHEMA IF NOT EXISTS public;
+SET search_path TO public;
 
 CREATE TABLE trucks (
     truck_id SERIAL PRIMARY KEY,
@@ -107,3 +111,12 @@ VALUES
 
 INSERT INTO drivers (full_name, email, password, assigned_truck_id, role)
 VALUES ('Test Driver', 'driver@example.com', 'password123', 2, 'driver');
+
+
+-- Request data:
+
+INSERT INTO requests (user_name, message, latitude, longitude, status)
+VALUES
+('Resident 1', 'Requires 4L Water', 55.3958, -1.4992, 'Pending'),
+('Resident 2', 'Requires fruits and vegetables', 54.5932, -1.6992, 'Pending'),
+('Resident 3', 'Needs eggs', 53.9921, -1.5993, 'Pending');
