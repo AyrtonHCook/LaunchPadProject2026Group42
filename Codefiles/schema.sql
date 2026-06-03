@@ -32,6 +32,16 @@ CREATE TABLE restock_locations (
     water_available BOOLEAN NOT NULL DEFAULT true
 );
 
+CREATE TABLE requests (
+    request_id SERIAL PRIMARY KEY,
+    user_name VARCHAR(100),
+    message TEXT,
+    latitude DECIMAL(9, 6) NOT NULL,
+    longitude DECIMAL(9, 6) NOT NULL,
+    status VARCHAR(20) DEFAULT 'Pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 INSERT INTO trucks (
     truck_name,
     location_name,
