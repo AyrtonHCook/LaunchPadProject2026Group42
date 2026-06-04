@@ -120,3 +120,7 @@ VALUES
 ('Resident 1', 'Requires 4L Water', 55.3958, -1.4992, 'Pending'),
 ('Resident 2', 'Requires fruits and vegetables', 54.5932, -1.6992, 'Pending'),
 ('Resident 3', 'Needs eggs', 53.9921, -1.5993, 'Pending');
+
+-- Test requests table:
+
+SELECT * FROM requests;

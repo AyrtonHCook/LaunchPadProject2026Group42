@@ -344,7 +344,7 @@ router.post("/logout", requireDriverLogin, (req, res) => {
 
 // Pending resident requests for driver map:
 
-router.get("/requests", requireDriverLogin, async (req, res) => {
+router.get("/requests", async (req, res) => {
   try {
     const result = await pool.query(
       `
@@ -371,10 +371,10 @@ router.get("/requests", requireDriverLogin, async (req, res) => {
 
     return res.status(500).json({
       success: false,
-      message: "SErver error loading requests"
+      message: "Server error loading requests"
     });
 
   }
-});
+}); 
 
 module.exports = router;
