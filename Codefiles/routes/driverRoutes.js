@@ -377,4 +377,36 @@ router.get("/requests", async (req, res) => {
   }
 }); 
 
+router.get("/trucks", async (req, res) => {
+  try {
+    const result = await pool.query(
+      `
+      SELECT
+        truck_id,
+        truck_name,
+        location_name,
+        latitude,
+        longitude,
+        food_stock,
+        water_stock,
+        is_active
+      FROM trucks
+      ORDER BY truck_id
+      `
+    );
+
+    res.json({
+      success: true,
+      trucks: result.rows
+    });
+  } catch (error) {
+    console.error("Fetching trucks error:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Server error loading trucks!"
+    });
+  }
+});
+
 module.exports = router;
