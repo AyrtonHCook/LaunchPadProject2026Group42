@@ -2,91 +2,44 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Driver Page</title>
-
-  <link rel="stylesheet" href="/css/driver.css">  
-
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LaunchPad — Driver Login</title>
+  <link rel="stylesheet" href="/css/driver.css">
 </head>
-<body>
+<body class="login-page">
 
-  <h1>Driver dashboard</h1>
+  <header class="topbar">
+    <div class="topbar__logo">
+      <span>🚛</span>
+      <span class="topbar__logo-name">LaunchPad</span>
+    </div>
+    <a class="topbar__back" href="/">← User view</a>
+  </header>
 
-  <div id="loginModal" class="modal">
-    <div class="modal-content">
-      <h2>Driver Login</h2>
+  <main class="login-main">
+    <div class="login-card">
+      <h1 class="login-card__title">Driver Login</h1>
+      <p class="login-card__sub">Sign in to access your truck dashboard.</p>
 
       <form id="driverLoginForm">
-        <label for="email">Email</label>
-        <input type="email" id="email" required>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" id="email" required placeholder="your@email.com" autocomplete="email">
+        </div>
 
-        <label for="password">Password</label>
-        <input type="password" id="password" required>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" required placeholder="••••••••" autocomplete="current-password">
+        </div>
 
-        <button type="submit">Login</button>
+        <button type="submit">Sign in</button>
       </form>
 
-      <p id="loginMessage"></p>
+      <p id="loginMessage" class="login-message"></p>
     </div>
-  </div>
-
-  <main id="driverDashboard" style="display: none;">
-
-    <section>
-      <h2 id="driverName">Driver Name</h2>
-      <p id="truckName">Truck Name</p>
-      <p id="truckLocation">Truck Location</p>
-      <p id="truckStatus">Status</p>
-    </section>
-
-    <section>
-      <h2>Truck Map</h2>
-
-      <div id="map"></div>
-    </section>
-
-    <section>
-      <h2>Update Truck Stock</h2>
-
-      <form id="stockForm">
-        <label for="foodStock">Food stock</label>
-        <input type="number" id="foodStock" min="0" required>
-
-        <label for="waterStock">Water stock</label>
-        <input type="number" id="waterStock" min="0" required>
-
-        <button type="submit">Update Stock</button>
-      </form>
-
-      <p id="stockMessage"></p>
-    </section>
-
-    <section>
-      <h2>Truck Status</h2>
-
-      <button id="setActiveButton">Set Active</button>
-      <button id="setInactiveButton">Set Inactive</button>
-
-      <p id="statusMessage"></p>
-    </section>
-
-    <section>
-      <h2>Restock Locations</h2>
-
-      <ul id="restockList">
-        <li>Restock locations will load here</li>
-      </ul>
-    </section>
-
-    <button id="logoutButton">Logout</button>
-
   </main>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
   <script src="/js/driver.js"></script>
+
 </body>
 </html>
