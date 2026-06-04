@@ -36,6 +36,10 @@ app.get("/driver", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "driver.html"));
 });
 
+app.get("/driverDash", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "driverDash.html"));
+});
+
 app.get("/debug/session", (req, res) => {
   res.json({
     sessionExists: !!req.session,
