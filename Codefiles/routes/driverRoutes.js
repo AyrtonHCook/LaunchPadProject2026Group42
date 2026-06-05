@@ -22,6 +22,77 @@ function requireDriverLogin(req, res, next) {
   next();
 }
 
+router.post("/register", async (req, res) => {
+  const { fullName, email, password } = req.body;
+
+  if (!fullName || !email || !password) {
+    return res.status(400).json({
+      success: false,
+      message: "Full name, email and password are required"
+    });
+  }
+
+  if (password.length < 4) {
+    return res.status(400).json({
+      success: false,
+      message: "Password must be at least 4 characters"
+    });
+  }
+
+  try {
+    const existingDriver = await pool.query(
+      `
+      SELECT driver_id
+      FROM drivers
+      WHERE email = $1
+      `,
+      [email]
+    );
+
+    if (existingDriver.rows.length > 0) {
+      return res.status(409).json({
+        success: false,
+        message: "A driver with this email already exists"
+      });
+    }
+
+    // all new drivers use truck 1 for testing
+    // proper version needs admin truck assignment
+    const result = await pool.query(
+      `
+      INSERT INTO drivers (
+        full_name,
+        email,
+        password,
+        assigned_truck_id,
+        role
+      )
+      VALUES ($1, $2, $3, 1, 'driver')   
+      RETURNING
+        driver_id,
+        full_name,
+        email,
+        assigned_truck_id,
+        role
+      `,
+      [fullName, email, password]
+    );
+
+    return res.status(201).json({
+      success: true,
+      message: "Driver registered successfully",
+      driver: result.rows[0]
+    });
+  } catch (error) {
+    console.error("Driver register error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Server error during registration"
+    });
+  }
+});
+
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -32,6 +103,9 @@ router.post("/login", async (req, res) => {
     });
   }
 
+
+    // passwords are plain text
+    // proper version should hash passwords
   try {
     const result = await pool.query(
       `

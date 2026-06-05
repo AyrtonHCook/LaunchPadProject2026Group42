@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LaunchPad — Driver Register</title>
+  <link rel="stylesheet" href="/css/driver.css">
+</head>
+<body class="login-page">
+
+  <header class="topbar">
+    <div class="topbar__logo">
+      <span>🚛</span>
+      <span class="topbar__logo-name">LaunchPad</span>
+    </div>
+    <a class="topbar__back" href="/">← User view</a>
+  </header>
+
+  <main class="login-main">
+    <div class="login-card">
+      <h1 class="login-card__title">Driver Register</h1>
+      <p class="login-card__sub">Create a driver account for the truck dashboard.</p>
+
+      <form id="driverRegisterForm">
+        <div class="form-group">
+          <label for="fullName">Full name</label>
+          <input type="text" id="fullName" required placeholder="Your full name" autocomplete="name">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" id="email" required placeholder="your@email.com" autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" required placeholder="Create a password" autocomplete="new-password">
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirm password</label>
+          <input type="password" id="confirmPassword" required placeholder="Repeat password" autocomplete="new-password">
+        </div>
+
+        <button type="submit">Create account</button>
+      </form>
+
+      <p id="registerMessage" class="login-message"></p>
+
+      <p class="login-card__footer">
+        Already have an account?
+        <a href="/driverLogin.html">Sign in here</a>
+      </p>
+    </div>
+  </main>
+
+  <script src="/js/driverregister.js"></script>
+
+</body>
+</html>
