@@ -4,6 +4,7 @@ const session = require("express-session");
 require("dotenv").config();
 
 const driverRoutes = require("./routes/driverRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -27,6 +28,7 @@ app.use(
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/drivers", driverRoutes);
+app.use("/users", userRoutes);
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
