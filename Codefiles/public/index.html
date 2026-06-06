@@ -3,152 +3,140 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LaunchPad — Find Support Near You</title>
+  <title>LadyWood Support Page — Birmingham Heat Response</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
-  <!-- Top bar -->
   <header class="topbar">
     <div class="topbar__logo">
-      <span>🚛</span>
-      <span class="topbar__logo-name">LaunchPad</span>
+      <svg class="topbar__logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 4v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      <span class="topbar__logo-name">LadyWood Support Page</span>
     </div>
     <div class="topbar__right">
-      <div class="temp-pill temp-pill--alert">🌡 38.2°C — Heatwave Active</div>
-      <button class="icon-btn" title="Language">🌐</button>
-      <a class="view-toggle" href="/driver"> Driver Login →  🚛</a>
+      <div class="temp-pill temp-pill--alert">38.2°C &mdash; Heatwave Active</div>
+      <div class="lang-switch">
+      <a class="lang-switch__btn lang-switch__btn--active" href="/index.html">GB</a>
+      <a class="lang-switch__btn" href="/dashAr.html">SA</a>
+      </div>
+      <a class="topbar__driver-link" href="/driver">Driver Login</a>
     </div>
   </header>
 
   <main class="content">
 
-    <!-- Hero / greeting -->
     <section class="hero">
-      <h1 class="hero__title">Find food &amp; water near you</h1>
+      <h1 class="hero__title">Find food and water near you</h1>
       <p class="hero__sub">Free support is available in your area right now. Find your nearest truck below.</p>
     </section>
 
-    <!-- Heatwave alert -->
     <div class="alert alert--critical">
-      <span class="alert__icon">🔥</span>
-      <div>
+      <div class="alert__bar"></div>
+      <div class="alert__body">
         <strong>Heatwave warning in Birmingham.</strong>
-        Stay indoors where possible. Free water and food is available from trucks near you.
+        Stay indoors where possible. Free water and food is available from support trucks near you.
       </div>
     </div>
 
-    <!-- Quick stats -->
     <div class="stats">
       <div class="stat-card">
-        <div class="stat-card__icon">🚛</div>
         <div class="stat-card__value">12</div>
         <div class="stat-card__label">Trucks active now</div>
       </div>
       <div class="stat-card">
-        <div class="stat-card__icon">📍</div>
-        <div class="stat-card__value">0.3mi</div>
+        <div class="stat-card__value">0.3 mi</div>
         <div class="stat-card__label">Nearest truck</div>
       </div>
       <div class="stat-card">
-        <div class="stat-card__icon">💧</div>
         <div class="stat-card__value">Free</div>
         <div class="stat-card__label">Water available</div>
       </div>
     </div>
 
-    <!-- Map placeholder -->
     <section class="panel">
       <div class="panel__header">
         <h2 class="panel__title">Trucks near you</h2>
-        <a class="panel__link" href="map.html">Open full map →</a>
+        <a class="panel__link" href="map.html">Open full map</a>
       </div>
       <div class="map-area">
-        <span class="map-area__icon">🗺️</span>
-        <p>Live map will appear here</p>
+        <p class="map-area__label">Live map will appear here</p>
         <a class="btn btn--primary" href="map.html">Open Map</a>
       </div>
     </section>
 
-    <!-- Nearby trucks -->
     <section class="panel">
       <div class="panel__header">
         <h2 class="panel__title">Nearby trucks</h2>
       </div>
-
       <ul class="truck-list">
         <li class="truck-item">
           <span class="status status--active"></span>
           <div class="truck-item__info">
             <strong>Ladywood Central</strong>
-            <span class="truck-item__location">📍 Ladywood Middleway, B16 · 0.3 miles away</span>
+            <span class="truck-item__location">Ladywood Middleway, B16 &mdash; 0.3 miles away</span>
           </div>
           <div class="truck-item__stock">
-            <span class="pill pill--food">🍱 Food</span>
-            <span class="pill pill--water">💧 Water</span>
+            <span class="pill pill--food">Food</span>
+            <span class="pill pill--water">Water</span>
           </div>
         </li>
         <li class="truck-item">
           <span class="status status--active"></span>
           <div class="truck-item__info">
             <strong>Icknield Port</strong>
-            <span class="truck-item__location">📍 Icknield Port Rd, B16 · 0.6 miles away</span>
+            <span class="truck-item__location">Icknield Port Rd, B16 &mdash; 0.6 miles away</span>
           </div>
           <div class="truck-item__stock">
-            <span class="pill pill--food">🍱 Food</span>
-            <span class="pill pill--water">💧 Water</span>
+            <span class="pill pill--food">Food</span>
+            <span class="pill pill--water">Water</span>
           </div>
         </li>
         <li class="truck-item">
           <span class="status status--low"></span>
           <div class="truck-item__info">
             <strong>Spring Hill</strong>
-            <span class="truck-item__location">📍 Spring Hill, B18 · 0.9 miles away</span>
+            <span class="truck-item__location">Spring Hill, B18 &mdash; 0.9 miles away</span>
           </div>
           <div class="truck-item__stock">
-            <span class="pill pill--warn">⚠ Running low</span>
+            <span class="pill pill--warn">Running low</span>
           </div>
         </li>
       </ul>
     </section>
 
-    <!-- Request a truck -->
     <section class="panel panel--highlight">
-      <div class="panel__header">
-        <h2 class="panel__title">Can't get to a truck?</h2>
-      </div>
-      <p class="panel__desc">If you're unable to travel in the heat, you can request a truck to come closer to you.</p>
+      <h2 class="panel__title">Can't get to a truck?</h2>
+      <p class="panel__desc">If you are unable to travel in the heat, you can request a truck to come closer to you.</p>
       <button class="btn btn--primary btn--full">Request a truck near me</button>
     </section>
 
-    <!-- Local information -->
     <section class="panel">
       <div class="panel__header">
         <h2 class="panel__title">Local information</h2>
       </div>
       <ul class="info-list">
         <li class="info-item">
-          <span class="info-item__icon">🏥</span>
+          <div class="info-item__marker"></div>
           <div>
             <strong>Heat-related illness</strong>
             <p>If you or someone nearby feels unwell due to the heat, call 999 immediately.</p>
           </div>
         </li>
         <li class="info-item">
-          <span class="info-item__icon">🌊</span>
+          <div class="info-item__marker"></div>
           <div>
             <strong>Cooling centres open</strong>
             <p>Ladywood Library and Summerfield Park Pavilion are open as cool spaces today.</p>
           </div>
         </li>
         <li class="info-item">
-          <span class="info-item__icon">⏰</span>
+          <div class="info-item__marker"></div>
           <div>
             <strong>Truck operating hours</strong>
-            <p>Trucks are active 8am – 8pm while the heatwave alert is in place.</p>
+            <p>Trucks are active 8am to 8pm while the heatwave alert is in place.</p>
           </div>
         </li>
       </ul>
@@ -157,8 +145,8 @@
   </main>
 
   <footer class="footer">
-    <p>Birmingham City Council · LaunchPad Heat Response Programme</p>
-    <p>For emergencies call <strong>999</strong> · Non-emergency helpline: <strong>0121 303 1111</strong></p>
+    <p>Birmingham City Council &mdash; LaunchPad Heat Response Programme</p>
+    <p>Emergencies: <strong>999</strong> &nbsp;&middot;&nbsp; Non-emergency helpline: <strong>0121 303 1111</strong></p>
   </footer>
 
 </body>
