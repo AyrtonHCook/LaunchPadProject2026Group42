@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LadyWood Support Page — استجابة حرارة برمنغهام</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body { font-family: 'Cairo', sans-serif; }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar__logo">
+      <svg class="topbar__logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 4v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      <span class="topbar__logo-name">Ladywood Support Page</span>
+    </div>
+    <div class="topbar__right">
+      <div class="temp-pill temp-pill--alert">38.2°C &mdash; تحذير موجة حر</div>
+
+      <div class="lang-switch">
+        <a class="lang-switch__btn" href="/index.html">🇬🇧</a>
+        <a class="lang-switch__btn lang-switch__btn--active" href="/dashAr.html">🇸🇦</a>
+      </div>
+
+      <a class="topbar__driver-link" href="/driver">تسجيل دخول السائق</a>
+    </div>
+  </header>
+
+  <main class="content">
+
+    <section class="hero">
+      <h1 class="hero__title">ابحث عن الطعام والماء بالقرب منك</h1>
+      <p class="hero__sub">الدعم المجاني متاح في منطقتك الآن. ابحث عن أقرب شاحنة أدناه.</p>
+    </section>
+
+    <div class="alert alert--critical">
+      <div class="alert__bar"></div>
+      <div class="alert__body">
+        <strong>تحذير موجة حر في برمنغهام.</strong>
+        ابقَ في الداخل قدر الإمكان. الماء والطعام المجاني متاح من شاحنات الدعم القريبة منك.
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-card__value">12</div>
+        <div class="stat-card__label">شاحنة نشطة الآن</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__value">0.5 كم</div>
+        <div class="stat-card__label">أقرب شاحنة</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__value">مجاني</div>
+        <div class="stat-card__label">ماء متاح</div>
+      </div>
+    </div>
+
+    <section class="panel">
+      <div class="panel__header">
+        <h2 class="panel__title">الشاحنات بالقرب منك</h2>
+        <a class="panel__link" href="map.html">فتح الخريطة الكاملة</a>
+      </div>
+      <div class="map-area">
+        <p class="map-area__label">ستظهر الخريطة المباشرة هنا</p>
+        <a class="btn btn--primary" href="map.html">فتح الخريطة</a>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel__header">
+        <h2 class="panel__title">الشاحنات القريبة</h2>
+      </div>
+      <ul class="truck-list">
+        <li class="truck-item">
+          <span class="status status--active"></span>
+          <div class="truck-item__info">
+            <strong>مركز ليدوود</strong>
+            <span class="truck-item__location">Ladywood Middleway, B16 &mdash; على بُعد 0.5 كم</span>
+          </div>
+          <div class="truck-item__stock">
+            <span class="pill pill--food">طعام</span>
+            <span class="pill pill--water">ماء</span>
+          </div>
+        </li>
+        <li class="truck-item">
+          <span class="status status--active"></span>
+          <div class="truck-item__info">
+            <strong>إيكنيلد بورت</strong>
+            <span class="truck-item__location">Icknield Port Rd, B16 &mdash; على بُعد 1 كم</span>
+          </div>
+          <div class="truck-item__stock">
+            <span class="pill pill--food">طعام</span>
+            <span class="pill pill--water">ماء</span>
+          </div>
+        </li>
+        <li class="truck-item">
+          <span class="status status--low"></span>
+          <div class="truck-item__info">
+            <strong>سبرينج هيل</strong>
+            <span class="truck-item__location">Spring Hill, B18 &mdash; على بُعد 1.5 كم</span>
+          </div>
+          <div class="truck-item__stock">
+            <span class="pill pill--warn">الكميات تنفد</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="panel panel--highlight">
+      <h2 class="panel__title">لا تستطيع الوصول إلى شاحنة؟</h2>
+      <p class="panel__desc">إذا كنت غير قادر على التنقل في الحر، يمكنك طلب شاحنة للاقتراب منك.</p>
+      <button class="btn btn--primary btn--full">طلب شاحنة بالقرب مني</button>
+    </section>
+
+    <section class="panel">
+      <div class="panel__header">
+        <h2 class="panel__title">معلومات محلية</h2>
+      </div>
+      <ul class="info-list">
+        <li class="info-item">
+          <div class="info-item__marker"></div>
+          <div>
+            <strong>الأمراض المرتبطة بالحر</strong>
+            <p>إذا شعرت أنت أو أي شخص قريب منك بتوعك بسبب الحر، اتصل بـ 999 فوراً.</p>
+          </div>
+        </li>
+        <li class="info-item">
+          <div class="info-item__marker"></div>
+          <div>
+            <strong>مراكز التبريد مفتوحة</strong>
+            <p>مكتبة ليدوود وجناح سمرفيلد بارك مفتوحان كأماكن باردة اليوم.</p>
+          </div>
+        </li>
+        <li class="info-item">
+          <div class="info-item__marker"></div>
+          <div>
+            <strong>ساعات عمل الشاحنات</strong>
+            <p>الشاحنات نشطة من الساعة 8 صباحاً حتى 8 مساءً طوال فترة تحذير الحر.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>مجلس مدينة برمنغهام &mdash; برنامج LaunchPad للاستجابة للحر</p>
+    <p>حالات الطوارئ: <strong>999</strong> &nbsp;&middot;&nbsp; خط المساعدة: <strong>0121 303 1111</strong></p>
+  </footer>
+
+</body>
+</html>
