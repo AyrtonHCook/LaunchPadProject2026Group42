@@ -124,3 +124,8 @@ VALUES
 -- Test requests table:
 
 SELECT * FROM requests;
+
+
+ALTER TABLE requests 
+ADD COLUMN assigned_driver_id INTEGER REFERENCES drivers(driver_id),
+ADD COLUMN assigned_truck_id INTEGER REFERENCES trucks(truck_id);
