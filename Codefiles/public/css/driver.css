@@ -1,115 +1,136 @@
-/* ============================================================
-   LaunchPad — Driver CSS (login + dashboard)
-   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap');
-
-:root {
-  --bg:           #0d1117;
-  --surface:      #161b22;
-  --surface-2:    #1e2530;
-  --border:       #2a3240;
-  --orange:       #f97316;
-  --orange-dim:   rgba(249, 115, 22, 0.12);
-  --blue-text:    #7dd3fc;
-  --blue-dim:     rgba(56, 189, 248, 0.12);
-  --green-text:   #4ade80;
-  --green-dim:    rgba(34, 197, 94, 0.12);
-  --red:          #ef4444;
-  --red-text:     #f87171;
-  --red-dim:      rgba(239, 68, 68, 0.12);
-  --text:         #e2e8f0;
-  --text-soft:    #FFFFFF;
-  --text-muted:   #FFFFFF;
-  --font-display: 'Syne', sans-serif;
-  --font-body:    'DM Sans', sans-serif;
-  --radius:       12px;
-  --radius-sm:    8px;
-  --radius-pill:  999px;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-/* --- Reset ------------------------------------------------ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; }
+html, body {
+  height: 100%;
+}
+
 body {
-  font-family: var(--font-body);
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
+  font-family: 'Inter', sans-serif;
+  background-color: #0f1117;
+  color: #e0e0e0;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
 }
-a { color: inherit; text-decoration: none; }
-ul { list-style: none; }
-button { font-family: var(--font-body); cursor: pointer; border: none; background: none; }
 
-/* --- Topbar ----------------------------------------------- */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* ---- header ---- */
+
 .topbar {
-  height: 60px;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
+  background-color: #161b27;
+  padding: 0 20px;
+  height: 55px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1.5rem;
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 100;
+  border-bottom: 3px solid #e05c00;
 }
 
 .topbar__logo {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.1rem;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 17px;
+  color: white;
+}
+
+.topbar__logo-icon {
+  width: 22px;
+  height: 22px;
+  color: #e05c00;
 }
 
 .topbar__back {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  transition: color 0.15s;
+  font-size: 13px;
+  color: #909aab;
+  border: 1px solid #2e3347;
+  padding: 5px 12px;
+  border-radius: 5px;
+  transition: all 0.2s;
 }
 
-.topbar__back:hover { color: var(--orange); }
+.topbar__back:hover {
+  color: #e0e0e0;
+  border-color: #e05c00;
+}
 
 .topbar__driver-info {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  font-size: 0.85rem;
-  color: var(--text-soft);
+  gap: 10px;
   flex: 1;
-  padding: 0 1.5rem;
+  padding: 0 20px;
+  font-size: 13px;
+  color: #909aab;
 }
 
 .topbar__logout {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 0.35rem 0.85rem;
-  transition: all 0.15s;
+  font-size: 13px;
+  color: #909aab;
+  border: 1px solid #2e3347;
+  padding: 5px 12px;
+  border-radius: 5px;
+  transition: all 0.2s;
 }
 
 .topbar__logout:hover {
-  border-color: var(--red-text);
-  color: var(--red-text);
+  color: #f87171;
+  border-color: #f87171;
 }
 
-/* --- Header pills ----------------------------------------- */
+/* ---- header pills ---- */
+
 .header-pill {
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 0.2rem 0.65rem;
-  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 20px;
 }
 
-.header-pill--active { background: var(--green-dim); color: var(--green-text); }
-.header-pill--food   { background: var(--orange-dim); color: var(--orange); }
-.header-pill--water  { background: var(--blue-dim); color: var(--blue-text); }
+.header-pill--active {
+  background-color: #0e2a1a;
+  color: #4ade80;
+  border: 1px solid #1a5030;
+}
 
-/* ── LOGIN PAGE ──────────────────────────────────────────── */
+.header-pill--food {
+  background-color: #2a1a0e;
+  color: #e08050;
+  border: 1px solid #5a3010;
+}
+
+.header-pill--water {
+  background-color: #0e1e2a;
+  color: #7dd3fc;
+  border: 1px solid #1a3a50;
+}
+
+/* ---- login page ---- */
+
 .login-page {
   display: flex;
   flex-direction: column;
@@ -121,114 +142,140 @@ button { font-family: var(--font-body); cursor: pointer; border: none; backgroun
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 1.25rem;
+  padding: 24px 16px;
 }
 
 .login-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 2.5rem 2rem;
+  background: #161b27;
+  border: 1px solid #2e3347;
+  border-radius: 8px;
+  padding: 32px 28px;
   width: 100%;
   max-width: 400px;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+  border-top: 3px solid #e05c00;
 }
 
 .login-card__title {
-  font-family: var(--font-display);
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: var(--text);
-  margin-bottom: 0.35rem;
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 6px;
 }
 
 .login-card__sub {
-  font-size: 0.875rem;
-  color: var(--text-soft);
-  margin-bottom: 1.75rem;
+  font-size: 14px;
+  color: #FFFFFF;
+  margin-bottom: 24px;
+}
+
+.login-card__footer {
+  font-size: 13px;
+  color: #FFFFFF;
+  margin-top: 16px;
+  text-align: center;
+}
+
+.login-card__footer a {
+  color: #e05c00;
+}
+
+.login-card__footer a:hover {
+  text-decoration: underline;
 }
 
 .login-message {
-  font-size: 0.875rem;
-  color: var(--red-text);
-  margin-top: 0.75rem;
+  font-size: 13px;
+  color: #f87171;
+  margin-top: 10px;
   min-height: 1.2em;
 }
 
-/* ── DASHBOARD PAGE ──────────────────────────────────────── */
-.dashboard-main {
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 1.75rem 1.25rem 3rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
+/* ---- dashboard ---- */
+
+.dashboard-page {
+  min-height: 100vh;
 }
 
+.dashboard-main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px 16px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ---- panels ---- */
+
 .panel {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.5rem;
+  background: #161b27;
+  border: 1px solid #2e3347;
+  border-radius: 8px;
+  padding: 18px;
 }
 
 .panel h2 {
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 1rem;
+  font-size: 15px;
+  font-weight: 600;
+  color: #e0e0e0;
+  margin-bottom: 14px;
 }
 
 #driverName {
-  font-size: 1.4rem;
-  font-weight: 800;
-  margin-bottom: 0.5rem;
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
 }
 
-#truckName, #truckLocation, #truckStatus {
-  font-size: 0.9rem;
-  color: var(--text-soft);
-  margin-top: 0.2rem;
+#truckName,
+#truckLocation,
+#truckStatus {
+  font-size: 14px;
+  color: #FFFFFF;
+  margin-top: 4px;
 }
 
-/* --- Map -------------------------------------------------- */
+/* ---- map ---- */
+
 #map {
   width: 100%;
-  height: 320px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-  margin-top: 0.25rem;
+  height: 300px;
+  border-radius: 6px;
+  border: 1px solid #2e3347;
+  margin-top: 4px;
 }
 
-/* --- Restock list ----------------------------------------- */
+/* ---- restock list ---- */
+
 #restockList {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 8px;
 }
 
 #restockList li {
-  padding: 0.85rem 1rem;
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  font-size: 0.875rem;
-  color: var(--text-soft);
+  padding: 10px 14px;
+  background-color: #1e2333;
+  border: 1px solid #2e3347;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #FFFFFF;
 }
 
-/* --- Forms ------------------------------------------------ */
+/* ---- forms ---- */
+
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
-  margin-bottom: 1rem;
+  gap: 5px;
+  margin-bottom: 14px;
 }
 
 label {
-  font-size: 0.875rem;
+  font-size: 13px;
   font-weight: 500;
-  color: var(--text-soft);
+  color: #FFFFFF;
 }
 
 input[type="email"],
@@ -236,87 +283,118 @@ input[type="password"],
 input[type="number"],
 input[type="text"] {
   width: 100%;
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 0.75rem 1rem;
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  color: var(--text);
+  background: #1e2333;
+  border: 1px solid #2e3347;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #e0e0e0;
   outline: none;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition: border-color 0.15s;
 }
 
 input:focus {
-  border-color: var(--orange);
-  box-shadow: 0 0 0 3px rgba(249,115,22,0.2);
+  border-color: #e05c00;
 }
 
-input::placeholder { color: var(--text-muted); }
+input::placeholder {
+  color: #909aab;
+}
 
-/* --- Buttons ---------------------------------------------- */
+/* ---- buttons ---- */
+
 button[type="submit"] {
   width: 100%;
-  padding: 0.8rem;
-  background: var(--orange);
-  color: #fff;
+  padding: 10px;
+  background-color: #e05c00;
+  color: white;
   border: none;
-  border-radius: var(--radius-sm);
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 700;
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s;
-  margin-top: 0.25rem;
+  transition: background-color 0.2s;
+  margin-top: 4px;
 }
 
-button[type="submit"]:hover { background: #ea6a0a; }
+button[type="submit"]:hover {
+  background-color: #c45200;
+}
 
 #setActiveButton {
   flex: 1;
-  padding: 0.7rem 1rem;
-  background: var(--green-dim);
-  color: var(--green-text);
-  border: 1px solid rgba(74,222,128,0.3);
-  border-radius: var(--radius-sm);
-  font-size: 0.9rem;
-  font-weight: 600;
-  transition: all 0.15s;
+  padding: 10px;
+  background-color: #0e2a1a;
+  color: #4ade80;
+  border: 1px solid #1a5030;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
 }
 
-#setActiveButton:hover { background: #22c55e; color: #0d1117; }
+#setActiveButton:hover {
+  background-color: #27ae60;
+  color: #0f1117;
+  border-color: #27ae60;
+}
 
 #setInactiveButton {
   flex: 1;
-  padding: 0.7rem 1rem;
-  background: var(--red-dim);
-  color: var(--red-text);
-  border: 1px solid rgba(248,113,113,0.3);
-  border-radius: var(--radius-sm);
-  font-size: 0.9rem;
-  font-weight: 600;
-  transition: all 0.15s;
+  padding: 10px;
+  background-color: #2a1414;
+  color: #f87171;
+  border: 1px solid #5a2020;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
 }
 
-#setInactiveButton:hover { background: var(--red); color: #fff; }
+#setInactiveButton:hover {
+  background-color: #c0392b;
+  color: white;
+  border-color: #c0392b;
+}
+
+#logoutButton {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  color: #909aab;
+  border: 1px solid #2e3347;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+#logoutButton:hover {
+  border-color: #f87171;
+  color: #f87171;
+}
 
 .btn-row {
   display: flex;
-  gap: 0.75rem;
+  gap: 10px;
 }
 
-/* --- Feedback messages ------------------------------------ */
+/* ---- feedback messages ---- */
+
 .feedback-msg {
-  font-size: 0.875rem;
-  margin-top: 0.75rem;
-  color: var(--text-soft);
+  font-size: 13px;
+  color: #909aab;
+  margin-top: 10px;
   min-height: 1.2em;
 }
 
-/* --- Responsive ------------------------------------------- */
-@media (max-width: 600px) {
-  .login-card { padding: 1.75rem 1.25rem; }
-  .dashboard-main { padding: 1rem 1rem 2rem; }
+/* ---- responsive ---- */
+
+@media (max-width: 500px) {
+  .login-card { padding: 24px 16px; }
+  .dashboard-main { padding: 16px 12px 40px; }
   .btn-row { flex-direction: column; }
   .topbar__driver-info { display: none; }
 }
