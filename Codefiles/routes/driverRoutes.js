@@ -418,7 +418,7 @@ router.post("/logout", requireDriverLogin, (req, res) => {
 
 // Pending resident requests for driver map:
 
-router.get("/requests", async (req, res) => {
+router.get("/requests", requireDriverLogin, async (req, res) => {
   try {
     const result = await pool.query(
       `
@@ -451,7 +451,7 @@ router.get("/requests", async (req, res) => {
   }
 }); 
 
-router.get("/trucks", async (req, res) => {
+router.get("/trucks", requireDriverLogin, async (req, res) => {
   try {
     const result = await pool.query(
       `
@@ -482,5 +482,45 @@ router.get("/trucks", async (req, res) => {
     });
   }
 });
+
+router.post("/requests/:id/accept", requireDriverLogin, async (req, res) => {
+  try {
+    const result = await pool.query(
+      `
+      UPDATE requests
+      SET
+        status = 'Accepted',
+        assigned_driver_id = $1,
+        assigned_truck_id = $2
+      WHERE request_id = $3
+      AND status = 'Pending'
+      RETURNING request_id, status, assigned_driver_id, assigned_truck_id 
+      `,
+      [req.session.driverId, req.session.truckId, req.params.id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Request not found or has already been accepted!"
+      });
+    }
+
+    res.json({
+      success: true,
+      message: "Request accepted",
+      request: result.rows[0]
+    });
+
+  } catch (error) {
+    console.error("Accept request error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error accepting request!"
+    });
+  }
+});
+
+
 
 module.exports = router;
