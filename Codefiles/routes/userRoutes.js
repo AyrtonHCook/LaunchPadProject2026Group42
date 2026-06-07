@@ -3,7 +3,7 @@ const router = express.Router();
 
 const pool = require("../db");
 async function getTemp(){
-    const apiKey = "b05ea907e4a44f379d9132412260506 "; // insert key here
+    const apiKey = ""; // insert key here
     const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=Birmingham&aqi=no`;
     try{
         res = await fetch(url);
