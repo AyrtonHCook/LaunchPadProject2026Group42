@@ -3,19 +3,20 @@ const router = express.Router();
 
 const pool = require("../db");
 async function getTemp(){
-    const apiKey = ""; // insert key here
+    const apiKey = "b05ea907e4a44f379d9132412260506 "; // insert key here
     const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=Birmingham&aqi=no`;
     try{
-        fetch(url)
-        .then(res => res.json())
-        .then(data => {
-            temp = data.current.temp_c;
-        })
+        res = await fetch(url);
+        if(!res.ok){
+            return -999;
+        }
+        const data = await  res.json();
+        const temp = data.current.temp_c;
         return temp;
     }
     catch(error){
         console.error(error);
-        return -1;
+        return -999;
     }
 }
 
