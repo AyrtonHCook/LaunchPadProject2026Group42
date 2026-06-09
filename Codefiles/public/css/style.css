@@ -491,6 +491,17 @@ body {
   border-radius: 6px;
   border: 1px solid #2e3347;
   margin-top: 4px;
+  overflow: hidden;
+}
+
+.topbar {
+  z-index: 9999;
+}
+
+.leaflet-pane,
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 1;
 }
 
 
