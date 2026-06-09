@@ -7,6 +7,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
   <link rel="stylesheet" href="/css/style.css">
   <style>
     body { font-family: 'Cairo', sans-serif; }
@@ -60,17 +64,10 @@
         <div class="stat-card__label">ماء متاح</div>
       </div>
     </div>
-
-    <section class="panel">
-      <div class="panel__header">
-        <h2 class="panel__title">الشاحنات بالقرب منك</h2>
-        <a class="panel__link" href="map.html">فتح الخريطة الكاملة</a>
-      </div>
-      <div class="map-area">
-        <p class="map-area__label">ستظهر الخريطة المباشرة هنا</p>
-        <a class="btn btn--primary" href="map.html">فتح الخريطة</a>
-      </div>
-    </section>
+          <section class="panel">
+        <h2>خريطة الشاحنة</h2>
+        <div id="map"></div>
+      </section>
 
     <section class="panel">
       <div class="panel__header">
@@ -153,6 +150,7 @@
     <p>مجلس مدينة برمنغهام &mdash; برنامج LaunchPad للاستجابة للحر</p>
     <p>حالات الطوارئ: <strong>999</strong> &nbsp;&middot;&nbsp; خط المساعدة: <strong>0121 303 1111</strong></p>
   </footer>
-  <script src="/js/userDash.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="/js/userDash.js"></script>
 </body>
 </html>

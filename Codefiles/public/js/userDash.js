@@ -5,9 +5,9 @@ function toRadians(x) {
 
 // loaction1 and loaction2 are [latitude, longitude]
 function getDistance(lat1, lon1, lat2, lon2) {
-  radius = 3,959 // in miles
-  latDif = toRadians(lat2 - lat1);
-  lonDif = toRadians(lon2 - lon1);
+  const radius = 3959;
+  const latDif = toRadians(lat2 - lat1);
+  const lonDif = toRadians(lon2 - lon1);
   const a =
     Math.sin(latDif / 2) * Math.sin(latDif / 2) +
     Math.cos(toRadians(lat1)) *
@@ -29,7 +29,7 @@ function updateTemp(value) {
       tempPill.classList.add("temp-pill--alert");
     }
     alertBlock.style.display = "flex";
-    tempPill.textContent = `${value}°C &mdash; Heatwave Active`;
+    tempPill.textContent = `${value}°C - Heatwave Active`;
   } else {
     if (tempPill.classList.contains("temp-pill--alert")){
       tempPill.classList.remove("temp-pill--alert");
@@ -49,15 +49,19 @@ function updateStatCard(values){
 
 function generateStockCards(userLat, userLon, trucks, lang){
   truckList = document.getElementsByClassName("truck-list")[0];
+  truckList.innerHTML = "";
+
   trucks.forEach((truck) => {
     if (truck.is_active) {
       if (truck.food_stock <= 10 || truck.water_stock <= 10) {
         truckStatus = "status--low";
+      } else {
+        truckStatus = "status--active";
       }
-      truckStatus = "status--active";
     } else if (!truck.is_active) {
       truckStatus = "status--offline";
     }
+
     truckLocation = truck.location_name;
     distance = getDistance(
       userLat,
@@ -65,11 +69,12 @@ function generateStockCards(userLat, userLon, trucks, lang){
       Number(truck.latitude),
       Number(truck.longitude),
     );
+
     if (truck.food_stock <= 10) {
       foodStatus = "pill--warn";
       foodText = "Food running low";
       if (lang == "ar") {
-        foodText = "لكميات تنفطعام"
+        foodText = "الطعام ينفد";
       }
     } else {
       foodStatus = "pill--food";
@@ -78,23 +83,26 @@ function generateStockCards(userLat, userLon, trucks, lang){
         foodText = "طعام";
       }
     }
+
     if (truck.water_stock <= 10) {
       waterStatus = "pill--warn";
       waterText = "Water running low";
       if (lang == "ar") {
-        waterText ="ماءالكميات تنفد";
+        waterText = "الماء ينفد";
       }
     } else {
       waterStatus = "pill--water";
-      waterText = "Water"
+      waterText = "Water";
       if (lang == "ar") {
-        waterText ="ماء";
+        waterText = "ماء";
       }
     }
+
     if (!truck.is_active) {
       foodStatus = "";
       waterStatus = "";
     }
+
     const truckCard = document.createElement("li");
     truckCard.classList.add("truck-item");
     truckCard.innerHTML = `
@@ -112,62 +120,145 @@ function generateStockCards(userLat, userLon, trucks, lang){
   })
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+let map;
+let truckMarkers = [];
+let userMarker;
+
+const userIcon = L.icon({
+  iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+});
+
+const truckIcon = L.icon({
+  iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+});
+
+function initialiseMap(userLat, userLon, trucks) {
+  if (!map) {
+    map = L.map("map").setView([userLat, userLon], 14);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+    }).addTo(map);
+
+    userMarker = L.marker([userLat, userLon], { icon: userIcon })
+      .addTo(map)
+      .bindPopup("<strong>Your location</strong>");
+  } else {
+    map.setView([userLat, userLon], 14);
+  }
+
+  truckMarkers.forEach((marker) => {
+    map.removeLayer(marker);
+  });
+
+  truckMarkers = [];
+
+  trucks.forEach((truck) => {
+    if (!truck.is_active) {
+      return;
+    }
+
+    const lat = Number(truck.latitude);
+    const lon = Number(truck.longitude);
+
+    if (Number.isNaN(lat) || Number.isNaN(lon)) {
+      return;
+    }
+
+    const marker = L.marker([lat, lon], { icon: truckIcon })
+      .addTo(map)
+      .bindPopup(`
+        <strong>${truck.truck_name}</strong><br>
+        ${truck.location_name}<br>
+        Food: ${truck.food_stock}<br>
+        Water: ${truck.water_stock}
+      `);
+
+    truckMarkers.push(marker);
+  });
+
+  setTimeout(() => map.invalidateSize(), 100);
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
   try {
-    fetch("./userDash")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(window.location.pathname);
-        lang = "bg";
-        if (window.location.pathname == "/dashAr.html") {
-            lang = "ar";
-        }
-        // user location is fixed for the prototype
-        userLat = 52.480389570853774;
-        userLon = -1.9217520450213872;
-        result = data.body;
-        console.log(result);
-        temp = result.currentTemp;
-        updateTemp(temp);
-        truckNum = result.trucks.length;
-        // get distance of between user and each active truck and total water stock
-        distances = [];
-        waterSum = 0;
-        trucks = result.trucks;
-        trucks.forEach((element) => {
-          if (element.is_active) {
-            console.log("coords:", {
-              userLat,
-              userLon,
-              truckLat: Number(element.latitude),
-              truckLon: Number(element.longitude),
-            });
-            distance = getDistance(
-              userLat,
-              userLon,
-              Number(element.latitude),
-              Number(element.longitude),
-            );
-            distances.push(distance);
-            waterSum += element.water_stock;
-          }
+    const response = await fetch("/userDash");
+    const data = await response.json();
+
+    console.log(window.location.pathname);
+
+    lang = "bg";
+    if (window.location.pathname == "/dashAr.html") {
+        lang = "ar";
+    }
+
+    // user location is fixed for the prototype
+    userLat = 52.480389570853774;
+    userLon = -1.9217520450213872;
+
+    result = data.body;
+    console.log(result);
+
+    temp = result.currentTemp;
+    updateTemp(temp);
+
+    truckNum = result.trucks.length;
+
+    // get distance of between user and each active truck and total water stock
+    distances = [];
+    waterSum = 0;
+    trucks = result.trucks;
+
+    trucks.forEach((element) => {
+      if (element.is_active) {
+        console.log("coords:", {
+          userLat,
+          userLon,
+          truckLat: Number(element.latitude),
+          truckLon: Number(element.longitude),
         });
-        // get number of active trucks
-        truckNum = distances.length;
-        // get the distance of the nearest truck
-        console.log(distances);
-        closest = Math.min(...distances);
-        // if water is available
-        waterAvailable = false;
-        if (waterSum > 0) {
-          waterAvailable = "Available";
-        } else {
-            waterAailable = "Unavailable";
-        }
-        console.log([truckNum, closest, waterAvailable]);
-        updateStatCard([truckNum, closest.toFixed(1), waterAvailable]);
-        generateStockCards(userLat, userLon, trucks, lang);
-      });
+
+        distance = getDistance(
+          userLat,
+          userLon,
+          Number(element.latitude),
+          Number(element.longitude),
+        );
+
+        distances.push(distance);
+        waterSum += Number(element.water_stock);
+      }
+    });
+
+    // get number of active trucks
+    truckNum = distances.length;
+
+    // get the distance of the nearest truck
+    console.log(distances);
+    closest = distances.length > 0 ? Math.min(...distances) : 0;
+
+    // if water is available
+    waterAvailable = false;
+    if (waterSum > 0) {
+      waterAvailable = "Available";
+    } else {
+      waterAvailable = "Unavailable";
+    }
+
+    console.log([truckNum, closest, waterAvailable]);
+    updateStatCard([truckNum, closest.toFixed(1), waterAvailable]);
+    generateStockCards(userLat, userLon, trucks, lang);
+    initialiseMap(userLat, userLon, trucks);
   } catch (error) {
     console.error(error);
   }
@@ -270,45 +361,3 @@ document.addEventListener("keydown", (e) => {
     overlay.classList.remove("active");
   }
 });
-
-let map;
-let truckMarker;
-
-async function checkSession() {
-  try {
-    const response = await fetch("/userDashboardd");
-
-    const data = await response.json();
-
-    initialiseMap(data.driver);
-  } catch (error) {
-    console.error("Session check error:", error);
-  }
-}
-
-function initialiseMap(driver) {
-  const lat = Number(driver.latitude);
-  const lng = Number(driver.longitude);
-
-  if (Number.isNaN(lat) || Number.isNaN(lng)) return;
-
-  if (!map) {
-    map = L.map("map").setView([lat, lng], 14);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 19,
-    }).addTo(map);
-  } else {
-    map.setView([lat, lng], 14);
-  }
-
-  if (truckMarker) map.removeLayer(truckMarker);
-
-  truckMarker = L.marker([lat, lng]).addTo(map).bindPopup(`
-    <strong>Truck ${driver.truckId}</strong><br>
-   
-  `);
-
-  setTimeout(() => map.invalidateSize(), 100);
-}
-
-checkSession();
