@@ -5,7 +5,7 @@ function toRadians(x) {
 
 // loaction1 and loaction2 are [latitude, longitude]
 function getDistance(lat1, lon1, lat2, lon2) {
-  ((radius = 3), 959); // in miles
+  radius = 3,959 // in miles
   latDif = toRadians(lat2 - lat1);
   lonDif = toRadians(lon2 - lon1);
   const a =
@@ -22,31 +22,32 @@ function getDistance(lat1, lon1, lat2, lon2) {
 // heatwave active at 30 or above
 function updateTemp(value) {
   tempPill = document.getElementsByClassName("temp-pill")[0];
-  alertBlock = document.getElementsByClassName("alert alert--critical");
-  if (value >= 30) {
-    if (!tempPill.classList.contains("temp-pill--alert")) {
+  alertBlock = document.getElementsByClassName("alert")[0];
+  console.log(alertBlock);
+  if(value >= 30){
+    if (!tempPill.classList.contains("temp-pill--alert")){
       tempPill.classList.add("temp-pill--alert");
     }
-    alertBlock.display = "block";
+    alertBlock.style.display = "flex";
     tempPill.textContent = `${value}°C &mdash; Heatwave Active`;
   } else {
-    if (tempPill.classList.contains("temp-pill--alert")) {
+    if (tempPill.classList.contains("temp-pill--alert")){
       tempPill.classList.remove("temp-pill--alert");
     }
-    alertBlock.display = "none";
+    alertBlock.style.display = "none";
     tempPill.textContent = `${value}°C`;
   }
 }
 
 // values is array
-function updateStatCard(values) {
+function updateStatCard(values){
   statCards = document.getElementsByClassName("stat-card__value");
   statCards[0].textContent = values[0];
   statCards[1].textContent = `${values[1]} mi`;
   statCards[2].textContent = values[2];
 }
 
-function generateStockCards(userLat, userLon, trucks) {
+function generateStockCards(userLat, userLon, trucks, lang){
   truckList = document.getElementsByClassName("truck-list")[0];
   trucks.forEach((truck) => {
     if (truck.is_active) {
@@ -67,16 +68,28 @@ function generateStockCards(userLat, userLon, trucks) {
     if (truck.food_stock <= 10) {
       foodStatus = "pill--warn";
       foodText = "Food running low";
+      if (lang == "ar") {
+        foodText = "لكميات تنفطعام"
+      }
     } else {
       foodStatus = "pill--food";
       foodText = "Food";
+      if (lang == "ar") {
+        foodText = "طعام";
+      }
     }
     if (truck.water_stock <= 10) {
       waterStatus = "pill--warn";
       waterText = "Water running low";
+      if (lang == "ar") {
+        waterText ="ماءالكميات تنفد";
+      }
     } else {
       waterStatus = "pill--water";
-      waterText = "Water";
+      waterText = "Water"
+      if (lang == "ar") {
+        waterText ="ماء";
+      }
     }
     if (!truck.is_active) {
       foodStatus = "";
@@ -96,7 +109,7 @@ function generateStockCards(userLat, userLon, trucks) {
 		    </div>
         `;
     truckList.appendChild(truckCard);
-  });
+  })
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -104,6 +117,11 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch("./userDash")
       .then((res) => res.json())
       .then((data) => {
+        console.log(window.location.pathname);
+        lang = "bg";
+        if (window.location.pathname == "/dashAr.html") {
+            lang = "ar";
+        }
         // user location is fixed for the prototype
         userLat = 52.480389570853774;
         userLon = -1.9217520450213872;
@@ -146,7 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         console.log([truckNum, closest, waterAvailable]);
         updateStatCard([truckNum, closest.toFixed(1), waterAvailable]);
-        generateStockCards(userLat, userLon, trucks);
+        generateStockCards(userLat, userLon, trucks, lang);
       });
   } catch (error) {
     console.error(error);
