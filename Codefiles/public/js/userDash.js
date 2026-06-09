@@ -250,3 +250,45 @@ document.addEventListener("keydown", (e) => {
     overlay.classList.remove("active");
   }
 });
+
+let map;
+let truckMarker;
+
+async function checkSession() {
+  try {
+    const response = await fetch("/userDashboardd");
+
+    const data = await response.json();
+
+    initialiseMap(data.driver);
+  } catch (error) {
+    console.error("Session check error:", error);
+  }
+}
+
+function initialiseMap(driver) {
+  const lat = Number(driver.latitude);
+  const lng = Number(driver.longitude);
+
+  if (Number.isNaN(lat) || Number.isNaN(lng)) return;
+
+  if (!map) {
+    map = L.map("map").setView([lat, lng], 14);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+    }).addTo(map);
+  } else {
+    map.setView([lat, lng], 14);
+  }
+
+  if (truckMarker) map.removeLayer(truckMarker);
+
+  truckMarker = L.marker([lat, lng]).addTo(map).bindPopup(`
+    <strong>${driver.truck_id}</strong>
+   
+  `);
+
+  setTimeout(() => map.invalidateSize(), 100);
+}
+
+checkSession();

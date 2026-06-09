@@ -10,6 +10,10 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
@@ -79,14 +83,8 @@
       </div>
 
       <section class="panel">
-        <div class="panel__header">
-          <h2 class="panel__title">Trucks near you</h2>
-          <a class="panel__link" href="map.html">Open full map</a>
-        </div>
-        <div class="map-area">
-          <p class="map-area__label">Live map will appear here</p>
-          <a class="btn btn--primary" href="map.html">Open Map</a>
-        </div>
+        <h2>Truck Map</h2>
+        <div id="map"></div>
       </section>
 
       <section class="panel">
@@ -159,6 +157,7 @@
         helpline: <strong>0121 303 1111</strong>
       </p>
     </footer>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="/js/userDash.js"></script>
   </body>
 </html>
