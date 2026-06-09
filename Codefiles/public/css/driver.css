@@ -247,6 +247,16 @@ button {
   overflow: hidden;
 }
 
+.topbar {
+  z-index: 9999;
+}
+
+.leaflet-pane,
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 1;
+}
+
 .leaflet-container {
   z-index: 1;
 }
