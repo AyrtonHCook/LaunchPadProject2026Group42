@@ -160,7 +160,9 @@ document.addEventListener("DOMContentLoaded", () => {
         // if water is available
         waterAvailable = false;
         if (waterSum > 0) {
-          waterAvailable = true;
+          waterAvailable = "Available";
+        } else {
+            waterAailable = "Unavailable";
         }
         console.log([truckNum, closest, waterAvailable]);
         updateStatCard([truckNum, closest.toFixed(1), waterAvailable]);
@@ -302,7 +304,7 @@ function initialiseMap(driver) {
   if (truckMarker) map.removeLayer(truckMarker);
 
   truckMarker = L.marker([lat, lng]).addTo(map).bindPopup(`
-    <strong>${driver.truck_id}</strong>
+    <strong>Truck ${driver.truckId}</strong><br>
    
   `);
 
