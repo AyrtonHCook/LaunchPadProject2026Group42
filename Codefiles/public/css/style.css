@@ -89,6 +89,11 @@ ul {
 
 /* ---- main content ---- */
 
+.leaflet-container {
+  z-index: 1;
+}
+
+
 .content {
   max-width: 700px;
   margin: 0 auto;
