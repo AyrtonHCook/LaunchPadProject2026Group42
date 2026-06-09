@@ -2,21 +2,22 @@ const express = require("express");
 const router = express.Router();
 
 const pool = require("../db");
-async function getTemp() {
-  const apiKey = ""; // insert key here
-  const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=Birmingham&aqi=no`;
-  try {
-    res = await fetch(url);
-    if (!res.ok) {
-      return -999;
+async function getTemp(){
+    const apiKey = "bfa64163226c4f04ab8104959260806"; // insert key here
+    const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=Birmingham&aqi=no`;
+    try{
+        res = await fetch(url);
+        if(!res.ok){
+            return -999;
+        }
+        const data = await  res.json();
+        const temp = data.current.temp_c;
+        return temp;
     }
-    const data = await res.json();
-    const temp = data.current.temp_c;
-    return temp;
-  } catch (error) {
-    console.error(error);
-    return -999;
-  }
+    catch(error){
+        console.error(error);
+        return -999;
+    }
 }
 
 router.get("/userDash", async (req, res) => {
