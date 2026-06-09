@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 * {
   box-sizing: border-box;
@@ -7,7 +7,7 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   background-color: #0f1117;
   color: #e0e0e0;
   font-size: 16px;
@@ -171,7 +171,7 @@ ul {
 
 .stat-card__label {
   font-size: 12px;
-  color: #FFFFFF;
+  color: #ffffff;
   margin-top: 4px;
 }
 
@@ -235,7 +235,7 @@ ul {
 
 .map-area__label {
   font-size: 14px;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 /* ---- truck list ---- */
@@ -271,7 +271,7 @@ ul {
 
 .truck-item__location {
   font-size: 12px;
-  color: #FFFFFF;
+  color: #ffffff;
   margin-top: 2px;
 }
 
@@ -330,40 +330,158 @@ ul {
 
 /* ---- info list ---- */
 
-.info-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+/* ---- info list ---- */
+
+body {
+  background-color: #1a1d23;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  min-height: 100vh;
+  padding: 40px 20px;
 }
 
-.info-item {
-  display: flex;
-  gap: 12px;
-  padding: 12px 14px;
-  background-color: #1e2333;
-  border: 1px solid #2e3347;
-  border-radius: 6px;
-  font-size: 14px;
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
-.info-item__marker {
+.section-title {
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.info-card {
+  background-color: #252830;
+  border-radius: 12px;
+  display: flex;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.info-card:hover {
+  transform: translateY(-4px) translateX(4px);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(255, 140, 50, 0.15);
+}
+
+.info-card:active {
+  transform: translateY(-2px) translateX(2px);
+}
+
+.accent-bar {
   width: 4px;
-  border-radius: 4px;
-  background-color: #e05c00;
+  background: linear-gradient(180deg, #ff8c32, #ff6b1a);
   flex-shrink: 0;
-  align-self: stretch;
 }
 
-.info-item strong {
-  display: block;
-  color: #e0e0e0;
-  margin-bottom: 2px;
+.card-content {
+  padding: 16px 20px;
 }
 
-.info-item p {
-  font-size: 13px;
-  color: #FFFFFF;
+.card-content h3 {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.card-content p {
+  color: #9ca3af;
+  font-size: 0.9rem;
   line-height: 1.5;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.popup-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup {
+  background-color: #2a2d35;
+  border-radius: 16px;
+  padding: 30px;
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  transform: scale(0.9) translateY(20px);
+  transition: transform 0.3s ease;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.popup-overlay.active .popup {
+  transform: scale(1) translateY(0);
+}
+
+.popup-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #9ca3af;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  line-height: 1;
+}
+
+.popup-close:hover {
+  color: #ffffff;
+}
+
+.popup h3 {
+  color: #ff8c32;
+  font-size: 1.3rem;
+  margin-bottom: 16px;
+  padding-right: 30px;
+}
+
+.popup #popupContent {
+  color: #d1d5db;
+  line-height: 1.7;
+}
+
+.popup #popupContent p {
+  margin-bottom: 12px;
+}
+
+.popup #popupContent ul {
+  margin: 12px 0;
+  padding-left: 20px;
+}
+
+.popup #popupContent li {
+  margin-bottom: 8px;
+}
+
+.popup #popupContent strong {
+  color: #ffffff;
 }
 
 /* ---- buttons ---- */
@@ -376,7 +494,7 @@ ul {
   border-radius: 6px;
   font-size: 14px;
   font-weight: 600;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   cursor: pointer;
   border: none;
   transition: background-color 0.2s;
@@ -415,11 +533,22 @@ ul {
 /* ---- responsive ---- */
 
 @media (max-width: 500px) {
-  .hero__title { font-size: 22px; }
-  .stats { grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .stat-card { padding: 12px 8px; }
-  .stat-card__value { font-size: 18px; }
-  .truck-item__stock { display: none; }
+  .hero__title {
+    font-size: 22px;
+  }
+  .stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .stat-card {
+    padding: 12px 8px;
+  }
+  .stat-card__value {
+    font-size: 18px;
+  }
+  .truck-item__stock {
+    display: none;
+  }
 }
 
 /* ---- language switch ---- */
