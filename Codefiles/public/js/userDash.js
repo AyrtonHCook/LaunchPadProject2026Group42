@@ -259,6 +259,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     updateStatCard([truckNum, closest.toFixed(1), waterAvailable]);
     generateStockCards(userLat, userLon, trucks, lang);
     initialiseMap(userLat, userLon, trucks);
+
+    mes = document.getElementsByClassName("request__message")[0];
+    mes.style.display = "none";
   } catch (error) {
     console.error(error);
   }
@@ -361,3 +364,11 @@ document.addEventListener("keydown", (e) => {
     overlay.classList.remove("active");
   }
 });
+
+
+requestButton = document.getElementsByClassName("request__btn")[0];
+requestButton.addEventListener("click", () => {
+  console.log("clicked");
+  mes = document.getElementsByClassName("request__message")[0];
+  mes.style.display = "flex";
+})
